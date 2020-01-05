@@ -86,6 +86,8 @@ EndSection
 
 Then you will need to restart your computer.
 
+Make sure you know what you are doing when you edit xorg.conf files. It can mess with your computer. So be sure to make a backup of your config files before changing anything. I had to secure boot a few times and revert configuration files back to the previous state before I found the configuration nvidia suggests.
+
 ### Setting up nvidia Dynamic Power Management
 
 nvidia power management lets the driver suspend and wake the GPU as needed, but there are some hardware requirements
@@ -107,17 +109,31 @@ you can edit the driver to change power management.
 From the nvidia docs
 ```
 Option "NVreg_DynamicPowerManagement=0x00"
-	With this setting, the NVIDIA driver will only use the GPU's built-in power management so it always is powered on and functional. This is the default option, since this feature is a new and highly experimental feature. Actual power usage will vary with the GPU's workload.
+	With this setting, the NVIDIA driver will only use the GPU's built-in power management so it
+	always is powered on and functional. This is the default option, since this feature is a new
+	and highly experimental feature. Actual power usage will vary with the GPU's workload.
 
 Option "NVreg_DynamicPowerManagement=0x01"
-	With this setting, the NVIDIA GPU driver will allow the GPU to go into its lowest power state when no applications are running that use the nvidia driver stack. Whenever an application requiring NVIDIA GPU access is started, the GPU is put into an active state. When the application exits, the GPU is put into a low power state.
+	With this setting, the NVIDIA GPU driver will allow the GPU to go into its lowest power state
+	when no applications are running that use the nvidia driver stack. Whenever an application
+	requiring NVIDIA GPU access is started, the GPU is put into an active state. When the
+	application exits, the GPU is put into a low power state.
 
 Option "NVreg_DynamicPowerManagement=0x02"
-	With this setting, the NVIDIA GPU driver will allow the GPU to go into its lowest power state when no applications are running that use the nvidia driver stack. Whenever an application requiring NVIDIA GPU access is started, the GPU is put into an active state. When the application exits, the GPU is put into a low power state.
+	With this setting, the NVIDIA GPU driver will allow the GPU to go into its lowest power state
+	when no applications are running that use the nvidia driver stack. Whenever an application
+	requiring NVIDIA GPU access is started, the GPU is put into an active state. When the
+	application exits, the GPU is put into a low power state.
 
-	Additionally, the NVIDIA driver will actively monitor GPU usage while applications using the GPU are running. When the applications have not used the GPU for a short period, the driver will allow the GPU to be powered down. As soon as the application starts using the GPU, the GPU is reactivated.
+	Additionally, the NVIDIA driver will actively monitor GPU usage while applications using the
+	GPU are running. When the applications have not used the GPU for a short period, the driver
+	will allow the GPU to be powered down. As soon as the application starts using the GPU, the
+	GPU is reactivated.
 
-	It is important to note that the NVIDIA GPU will remain in an active state if it is driving a display. In this case, the NVIDIA GPU will go to a low power state only when the X configuration option HardDPMS is enabled and the display is turned off by some means - either automatically due to an OS setting or manually using commands like xset.
+	It is important to note that the NVIDIA GPU will remain in an active state if it is driving a
+	display. In this case, the NVIDIA GPU will go to a low power state only when the X
+	configuration option HardDPMS is enabled and the display is turned off by some means - either
+	automatically due to an OS setting or manually using commands like xset.
 
 	Similarly, the NVIDIA GPU will remain in an active state if a CUDA application is running.
 ```
