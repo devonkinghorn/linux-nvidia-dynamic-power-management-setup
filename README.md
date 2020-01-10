@@ -77,14 +77,14 @@ Section "Screen"
   Device "iGPU"
 EndSection
 
-Section "Device"
-  Identifier "dGPU"
-  Driver "nvidia"
-EndSection
+#Section "Device"
+#  Identifier "dGPU"
+#  Driver "nvidia"
+#EndSection
 ```
 > source: http://download.nvidia.com/XFree86/Linux-x86_64/440.31/README/primerenderoffload.html
 
-Then you will need to restart your computer.
+Then you will need to restart your computer. or restart gdm or lightdm `sudo systemctl restart gdm`
 
 Make sure you know what you are doing when you edit xorg.conf files. It can mess with your computer. So be sure to make a backup of your config files before changing anything. I had to secure boot a few times and revert configuration files back to the previous state before I found the configuration nvidia suggests.
 
